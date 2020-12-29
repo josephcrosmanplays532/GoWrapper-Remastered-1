@@ -1,0 +1,191 @@
+<html><script type="text/javascript" class="__REQUESTLY__SCRIPT">(function(namespace) {
+  window[namespace] = window[namespace] || {};
+  window[namespace].responseRules = {};
+
+  let open = XMLHttpRequest.prototype.open;
+  XMLHttpRequest.prototype.open = function(method) {
+    this.addEventListener('readystatechange', function() {
+      if (this.readyState === 4 && window[namespace].responseRules.hasOwnProperty(this.responseURL)) {
+        const responseRule = window[namespace].responseRules[this.responseURL];
+        const {response, id} = responseRule;
+        const responseType = this.responseType;
+        let customResponse;
+
+        customResponse = response.type === 'code' ? responseRule.evaluator({
+            method,
+            url: this.responseURL,
+            requestHeaders: this.requestHeaders,
+            requestData: this.requestData,
+            responseType: this.responseType,
+            response: this.response
+          }) : response.value;
+
+        Object.defineProperty(this, 'response', {
+          get: function () {
+            if (response.type === 'static' && responseType === 'json') {
+              return JSON.parse(customResponse);
+            }
+            return customResponse;
+          }
+        });
+
+        if (responseType === '' || responseType === 'text') {
+          Object.defineProperty(this, 'responseText', {
+            get: function () {
+              return customResponse;
+            }
+          });
+        }
+
+        window.postMessage({
+          from: 'requestly',
+          type: 'response_rule_applied',
+          id
+        }, window.location.href);
+      }
+    }, false);
+    open.apply(this, arguments);
+  };
+
+  let send = XMLHttpRequest.prototype.send;
+  XMLHttpRequest.prototype.send = function(data) {
+    this.requestData = data;
+    send.apply(this, arguments);
+  };
+
+  let setRequestHeader = XMLHttpRequest.prototype.setRequestHeader;
+  XMLHttpRequest.prototype.setRequestHeader = function(header, value) {
+    this.requestHeaders = this.requestHeaders || {};
+    this.requestHeaders[header] = value;
+    setRequestHeader.apply(this, arguments);
+  }
+})('__REQUESTLY__')</script><head>
+<meta charset="UTF-8">
+<link rel="icon" href="../../favicon.ico" type="image/png">
+<title>Video List</title>
+<meta name="description" content="Wrapper: Inline's Public Video List">
+<link rel="stylesheet" type="text/css" href="../css/modern-normalize.css">
+<link rel="stylesheet" type="text/css" href="../css/global.css">
+<link rel="stylesheet" type="text/css" href="../css/list.css">
+<script async="" src="/cdn-cgi/bm/cv/2172558837/api.js"></script></head>
+<body><div id="cf_alert_div"><style>#cf_alert_div{margin:0 0 5px;padding:0;position:relative;top:0;left:0;display:block;z-index:99999;background-color:#f7f7f8;box-shadow:0 5px 5px rgba(0,0,0,.25)}#cf_alert_div a,#cf_alert_div a:visited{text-decoration:none;color:#276d9b;font-weight:600}#cf_alert_div strong{font-weight:600}#cf_alert_div table{width:100%}#cf_alert_div table td{vertical-align:middle}#cf_alert_div p{margin:0;padding:0;max-width:1100px}#cf_alert_div .wrapper{padding:0;margin:0;text-align:left;font-family:-apple-system,system-ui,BlinkMacSystemFont,segoe ui,Roboto,Oxygen,Ubuntu,helvetica neue,Arial,sans-serif;font-weight:400;font-style:normal;font-size:12px;padding:16px 3.334%}#cf_alert_div .wrapper td.refresh{text-align:center;min-width:140px}#cf_alert_div .wrapper td.refresh a{display:inline-block;padding:8px 24px;border:1.5px solid #276d9b;border-radius:5px;margin-right:20px}#cf_alert_div .wrapper td.content{position:relative;padding-right:25px;color:#1d1f20;font-size:14px;max-width:900px}#cf_alert_div .wrapper .x{position:absolute;top:0;right:-12.5px;height:25px;width:25px;cursor:pointer}#cf_alert_div .wrapper .x .line{display:block;height:15px;width:3px;position:absolute;top:5px;left:11px;background:#4e5255}#cf_alert_div .wrapper .x .line:first-of-type{transform:rotate(135deg)}#cf_alert_div .wrapper .x .line:last-of-type{transform:rotate(45deg)}</style><div class="wrapper"><table><tbody><tr><td class="refresh"><a href="#" onclick="document.cookie='cf_use_ob=0;path=/';window.location.reload();return false;">Refresh</a><noscript style="margin:10px 0 10px 0;padding:0;font:12px Helvetica,Arial,sans-serif;color:#404040;display:block">(Enable JavaScript first.)</noscript></td><td class="content"><p>This website <strong>wrapperinline-spark.tk/pages/html/list.html</strong> is currently offline. <a href="https://www.cloudflare.com/always-online/" target="_blank">Cloudflare's Always Online™</a> shows a snapshot of this web page from the <a href="https://archive.org/web/" target="_blank">Internet Archive's Wayback Machine</a>. To check for the live version, click <strong>Refresh</strong>.</p><a class="x" href="javascript:void(null);" onclick="document.getElementById('cf_alert_div').style.display='none';"><span class="line"></span> <span class="line"></span></a></td></tr></tbody></table></div></div>
+<header>
+<h1 style="margin:0"><img id="logo" src="../img/list_logo.png" alt="Wrapper: Inline"></h1>
+<nav id="headbuttons">
+<div class="dropdown_contain button_small">
+<div class="dropdown_button">CREATE A CHARACTER</div>
+<nav class="dropdown_menu">
+<a href="/cc_browser?themeId=family">Comedy World</a>
+<hr>
+<a href="/cc_browser?themeId=anime">Anime</a>
+<a href="/cc_browser?themeId=ninjaanime">Anime Ninja</a>
+<hr>
+<a href="/cc_browser?themeId=cc2">Peepz</a>
+<a href="/cc_browser?themeId=chibi">Chibi Peepz</a>
+<a href="/cc_browser?themeId=ninja">Chibi Ninjas</a>
+</nav>
+</div>
+<a href="/go_full" class="button_big">MAKE A VIDEO</a>
+</nav>
+</header>
+<div class="warning">
+Welcome to Wrapper Inline! You can join our Discord server <a href="https://discord.gg/CsPXFES" style="text-decoration: underline;">here!</a> (https://discord.gg/CsPXFES)
+<br>
+<b>Also, please note that the LVM is <c>PUBLIC!</c> You can share it to anyone you want, I don't really care. If anything, <c>PLEASE</c> share it to others, I want this project of mine to get more traction.</b>
+</div>
+<main>
+<table>
+<thead>
+<tr>
+<td></td>
+<td>Video Title</td>
+<td>Last Modified</td>
+<td></td>
+</tr>
+</thead>
+<tbody></tbody>
+<tfoot>
+<tr>
+<td colspan="127"><a id="load_more" href="javascript:;">LOAD MORE...</a></td>
+</tr>
+</tfoot>
+</table>
+</main>
+<footer>
+<nav id="foot-left">
+<a href="https://www.youtube.com/channel/UCDVko90epWXy6D4mGQnbYoA">My Youtube</a>
+<a href="https://discord.gg/tdBQhm3">The Crew Public Discord</a>
+</nav>
+<nav id="foot-right">
+<a href="https://www.youtube.com/channel/UCJwK22PVfKnSEuuoF2-vv3w">Benson</a>
+<a href="https://wrapperinline.tk:4664/caillou.html">Caillou</a>
+</nav>
+</footer>
+<form enctype="multipart/form-data" action="/upload_movie" method="post">
+<input id="file" type="file" onchange="this.form.submit()" name="import">
+</form>
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'5e5549a8e9871f9b',m:'83c4fb3ed3be4da038aa3f1f350654fcca506767-1603223635-1800-AXe0qUDv1X0LkRyWyQ/mT624ELeekiWMnHfEnhs/wIOYxqKXmw0RI5OActcWWtx7uxvu05DdkRzk8nuF7e0/z1lmfWMv7K56ZvdN5fEAgUg6npnO/y9WvFAqUNNpH6Yr5K6BI/N5LaVAK/OiV9ogIrk=',s:[0x8fe2dda81f,0x930d265c61],}})();</script>
+<script>
+	const closeReq = new XMLHttpRequest();
+	closeReq.open('GET', '/events/close');
+	closeReq.send();
+
+	var json;
+	var tbody = document.getElementsByTagName('tbody')[0];
+	var loadMore = document.getElementById('load_more');
+	const listReq = new XMLHttpRequest();
+	listReq.open('GET', '/movieList');
+	listReq.send();
+
+	var C = 0;
+	function loadRows() {
+		let c = C; C += 69;
+		for (; c < C; c++) {
+			if (c > json.length - 1) {
+				loadMore.remove();
+				break;
+			}
+
+			const tbl = json[c];
+			const date = tbl.date.substr(0, 10) + ' ' + tbl.date.substr(11);
+			tbody.insertAdjacentHTML('beforeend',
+				'<tr><td><img src="/movie_thumbs/' + tbl.id + '"></td><td><div>' + tbl.title + '</div><div>' + tbl.durationString + '</div><div><a>Video ID: </a>' + tbl.id + '</div></div></td><td><span>' + date.match(/./g).join('</span><span>') + '</span></td><td><a href="javascript:;" onclick="popup(\'' + tbl.id + '\')"></a><a href="/go_full?movieId=' + tbl.id + '"></a><a href="/movies/' + tbl.id + '.xml" download="' + tbl.id + '"></a></td></tr>');
+		}
+	}
+
+	loadMore.onclick = loadRows;
+	listReq.onreadystatechange = function (e) {
+		if (listReq.readyState != 4) return;
+		json = JSON.parse(listReq.responseText);
+		loadRows();
+	}
+
+	function popup(id) {
+		window.open('/player?movieId=' + id, 'MsgWindow', 'width=1280,height=720,left=' + (screen.width / 2 - 1280) + ',top=' + (screen.height / 2 - 720));
+	}
+</script>
+<style>
+			.warning {
+			font-size: 14px;
+			padding: 10px 0;
+			background-color: #5596e6;
+			text-align: center;
+		}
+
+		.warning>a {
+			color: #ffffff;
+		}
+
+		.warning>b {
+			color: crimson;
+			font-weight: bold;
+		}
+
+		.warning>c {
+			color: crimson;
+			font-weight: bolder;
+			font-style: italic;
+		}
+
+</style>
+</body></html>
