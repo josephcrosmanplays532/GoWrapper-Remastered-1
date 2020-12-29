@@ -1,5 +1,5 @@
 # GoWrapper Remastered
-Host it GoWrapper Remastered! [Node.js](https://nodejs.org/)
+Host GoWrapper Remastered! [Node.js](https://nodejs.org/)
 
 # Server
 If you want too edit the Asset Server, then click [here](https://github.com/2Epik4u/Wrapper-Online-Assets).
