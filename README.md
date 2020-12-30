@@ -1,12 +1,12 @@
-# GoAnifire Heroku
-Host it GoAnifire Heroku! [Node.js](https://nodejs.org/)
+# Wrapper Inline
+Host Wrapper Inline! [Node.js](https://nodejs.org/)
 
 # Server
-If you want too edit the Asset Server, then click [here](https://github.com/2Epik4u/Wrapper-Online-Assets).
+If you want too edit the Asset Server, then click [here](https://github.com/SparkerAnimate/WrapperInlineAssets).
 
 # Start
 Run the [start.bat](https://github.com/2Epik4u/Wrapper-Online/blob/master/start.bat) to start.
-For macos run [start.sh](https://github.com/2Epik4u/Wrapper-Online/blob/master/start.sh)
+For macos, run [start.sh](https://github.com/2Epik4u/Wrapper-Online/blob/master/start.sh)
 
 # Host On Evennode
 1. make a account
